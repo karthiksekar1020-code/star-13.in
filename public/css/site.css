@@ -1,0 +1,642 @@
+/* Estuary Dreamz BOATEL: public site.
+   Palette taken from the original BOATEL logo: espresso wood, deep navy, antique gold. Do not change. */
+:root{
+  --ink:#140d09; --wood:#24160f; --navy:#0e2037; --navy-2:#16304f;
+  --gold:#c9a45c; --gold-2:#e2c585; --ivory:#f6efe2; --sand:#ece2cf; --text:#2b221b; --muted:#6f6254;
+  --serif:'Cormorant Garamond',Georgia,'Times New Roman',serif; --sans:'Jost',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --maxw:1240px; --gut:clamp(18px,4vw,40px); --ease:cubic-bezier(.2,.7,.2,1); --nav-h:78px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--sans);font-weight:300;font-size:1.05rem;line-height:1.7;color:var(--text);background:var(--ivory);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:3px}
+h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.1;margin:0 0 .5em;text-wrap:balance}
+h2{font-size:clamp(2rem,4.4vw,3.2rem)} h3{font-size:1.45rem}
+p{margin:0 0 1.1em}
+ul{margin:0;padding:0;list-style:none}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--gold);color:var(--ink);padding:10px 16px;z-index:200}
+.skip:focus{left:8px}
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding-inline:var(--gut)}
+.center{text-align:center}
+
+/* ---------- navigation ---------- */
+.nav{position:fixed;inset:0 0 auto 0;z-index:100;transition:background .4s var(--ease),box-shadow .4s var(--ease),padding .4s var(--ease);padding-block:10px;color:#fff}
+.nav.solid,.nav.open{background:rgba(14,32,55,.96);backdrop-filter:blur(10px);box-shadow:0 6px 30px rgba(0,0,0,.25);padding-block:4px}
+.nav-in{max-width:1400px;margin:0 auto;padding-inline:var(--gut);display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:var(--nav-h)}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;flex:0 0 auto}
+.brand img{width:52px;height:auto}
+.brand span{display:flex;flex-direction:column;line-height:1.15}
+.brand b{font-family:var(--serif);font-size:1.5rem;letter-spacing:.2em;font-weight:600}
+.brand small{font-size:.62rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold-2)}
+#menu ul{display:flex;align-items:center;gap:clamp(12px,1.5vw,26px)}
+#menu a:not(.btn){font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;font-weight:500;padding:8px 2px;position:relative;white-space:nowrap}
+#menu a:not(.btn)::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+#menu a:not(.btn):hover::after,#menu a[aria-current="page"]::after{transform:scaleX(1)}
+#menu a[aria-current="page"]{color:var(--gold-2)}
+.nav-cta{margin-left:4px}
+.burger{display:none;width:46px;height:46px;border:1px solid rgba(255,255,255,.4);background:transparent;cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0}
+.burger i{display:block;width:20px;height:1.5px;background:#fff;transition:.3s var(--ease)}
+.nav.open .burger i:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav.open .burger i:nth-child(2){opacity:0}
+.nav.open .burger i:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 30px;border:1px solid var(--gold);font:500 .76rem var(--sans);letter-spacing:.22em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:.35s var(--ease);margin:0 8px 10px 0;background:transparent;color:#fff}
+.btn.sm{padding:11px 20px;font-size:.7rem;margin:0}
+.btn-gold{background:var(--gold);color:var(--ink)}
+.btn-gold:hover{background:var(--gold-2);border-color:var(--gold-2);transform:translateY(-2px);box-shadow:0 10px 24px rgba(201,164,92,.3)}
+.btn-line{color:var(--gold-2)}
+.btn-line:hover{background:var(--gold);color:var(--ink)}
+.btn-line.dark{color:var(--navy);border-color:var(--navy)}
+.btn-line.dark:hover{background:var(--navy);color:#fff}
+.center .btn{margin-inline:6px}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;color:#fff;overflow:hidden;background:var(--navy)}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:kb 22s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.08)}}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,32,55,.45) 0%,rgba(14,32,55,.16) 42%,transparent 72%),linear-gradient(180deg,rgba(14,32,55,.2) 0%,transparent 30%,transparent 55%,rgba(20,13,9,.45) 100%)}
+.hero .eyebrow{text-shadow:0 1px 10px rgba(0,0,0,.6)}.hero-links a{text-shadow:0 1px 8px rgba(0,0,0,.7)}
+.hero-in{position:relative;padding-top:calc(var(--nav-h) + 30px);padding-bottom:70px}
+.eyebrow{display:inline-block;font-size:.72rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:18px;position:relative;padding-left:46px}
+.eyebrow::before{content:"";position:absolute;left:0;top:50%;width:34px;height:1px;background:var(--gold)}
+.hero h1{font-size:clamp(3rem,9vw,7rem);font-weight:400;line-height:.98;margin-bottom:.3em;max-width:12ch}
+.hero p{max-width:560px;font-size:1.18rem;color:rgba(255,255,255,.9)}
+.hero-cta{margin-top:28px}
+.hero-links{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:22px;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase}
+.hero-links a{color:var(--gold-2);text-decoration:none;border-bottom:1px solid transparent;transition:.3s}
+.hero-links a:hover{border-color:var(--gold-2)}
+.hero .eyebrow,.hero h1,.hero p,.hero-cta,.hero-links{opacity:0;transform:translateY(26px);animation:rise .9s var(--ease) forwards}
+.hero h1{animation-delay:.15s}.hero p{animation-delay:.3s}.hero-cta{animation-delay:.45s}.hero-links{animation-delay:.6s}
+@keyframes rise{to{opacity:1;transform:none}}
+
+.page-hero{position:relative;min-height:46vh;display:flex;align-items:flex-end;color:#fff;background:var(--navy);overflow:hidden}
+.page-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.page-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,32,55,.42),rgba(14,32,55,.08) 48%,rgba(20,13,9,.5))}
+.page-hero-in{position:relative;z-index:1;padding-top:calc(var(--nav-h) + 50px);padding-bottom:50px}
+.page-hero h1{font-size:clamp(2.4rem,6vw,4.6rem);margin-bottom:.15em}
+.page-hero p{font-size:1.15rem;margin:0;max-width:640px;color:rgba(255,255,255,.88)}
+
+/* ---------- sections ---------- */
+.section{padding-block:clamp(64px,9vw,120px)}
+.section.dark{background:var(--navy);color:#fff}
+.section.sand{background:var(--sand)}
+.head{max-width:720px;margin:0 auto clamp(34px,5vw,60px);text-align:center}
+.head .eyebrow{padding-left:0}.head .eyebrow::before{display:none}
+.lead{font-size:1.2rem;color:var(--muted)}
+.dark .lead{color:rgba(255,255,255,.78)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,90px);align-items:center}
+.split.rev .split-text{order:2}
+.split-text{min-width:0}
+.split-img{position:relative;min-width:0;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.split-img img{width:100%;height:100%;object-fit:cover;aspect-ratio:3/4;transition:transform .8s var(--ease)}
+.split-img img.alt{margin-top:46px}
+.split-img.single{display:block}.split-img.single img{aspect-ratio:4/3}
+.split-img:hover img{transform:scale(1.02)}
+.grid{display:grid;gap:clamp(18px,2.4vw,30px)}
+.rooms-grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr))}
+.fac-grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr))}
+.exp-grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr))}
+.quote-grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr))}
+.grid.three{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+
+.room-card{background:#fff;color:var(--text);display:flex;flex-direction:column;box-shadow:0 14px 40px rgba(0,0,0,.12);overflow:hidden}
+.room-img{display:block;overflow:hidden;aspect-ratio:4/3}
+.room-img img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+.room-card:hover .room-img img{transform:scale(1.06)}
+.room-body{padding:24px;display:flex;flex-direction:column;gap:6px;flex:1}
+.room-body h3{margin:0}.room-body h3 a{text-decoration:none}
+.room-body p{color:var(--muted);font-size:1rem;margin:0}
+.room-meta{display:flex;justify-content:space-between;gap:10px;font-size:.88rem;color:var(--muted);margin-top:auto;padding-top:14px;border-top:1px solid var(--sand)}
+.price{color:var(--navy);font-weight:500}
+.room-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px}
+.chips li{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:5px 11px;border:1px solid var(--gold);color:var(--wood)}
+.dark .chips li{color:var(--gold-2)}
+.facts{display:flex;gap:30px;flex-wrap:wrap;margin:18px 0 24px}
+.facts dt{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}.facts dd{margin:0;font-family:var(--serif);font-size:1.4rem;color:var(--navy)}
+
+.fac{padding:30px 26px;border:1px solid rgba(201,164,92,.35);transition:.4s var(--ease);background:rgba(255,255,255,.02)}
+.section:not(.dark) .fac{background:#fff;border-color:var(--sand)}
+.fac:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 18px 40px rgba(0,0,0,.12)}
+.fac-ic{display:inline-flex;color:var(--gold);margin-bottom:14px}
+.fac h3{font-size:1.35rem;margin-bottom:.3em}.fac p{margin:0;font-size:.98rem;color:var(--muted)}
+.dark .fac p{color:rgba(255,255,255,.75)}
+
+.exp{background:#fff;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.exp img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .9s var(--ease)}
+.exp:hover img{transform:scale(1.05)}.exp div{padding:22px}.exp h3{font-size:1.35rem}.exp p{margin:0;color:var(--muted);font-size:.98rem}
+.exp{overflow:hidden}.exp img{display:block}
+.note{background:var(--sand);padding:clamp(24px,4vw,40px);margin:40px auto;max-width:760px;border-left:3px solid var(--gold)}
+.note.center{border-left:0;border-top:3px solid var(--gold)}.note p{margin:0 0 12px;color:var(--muted)}
+
+.g-preview{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:30px}
+.g-preview a{overflow:hidden;aspect-ratio:3/4;display:block}
+.g-preview img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.g-preview a:hover img{transform:scale(1.08)}
+
+.filters{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:34px}
+.chip{font:500 .72rem var(--sans);letter-spacing:.18em;text-transform:uppercase;padding:10px 20px;background:transparent;border:1px solid var(--navy);color:var(--navy);cursor:pointer;transition:.3s}
+.chip:hover,.chip.on{background:var(--navy);color:#fff}
+.masonry{columns:3 280px;column-gap:16px}
+.g-item{break-inside:avoid;margin:0 0 16px;position:relative;overflow:hidden;background:var(--sand)}
+.g-item[hidden]{display:none}
+.g-btn{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in}
+.g-btn img{width:100%;height:auto;transition:transform .8s var(--ease)}
+.g-item:hover img{transform:scale(1.05)}
+.g-item figcaption{position:absolute;inset:auto 0 0 0;padding:34px 16px 12px;color:#fff;font-size:.86rem;background:linear-gradient(0deg,rgba(14,32,55,.85),transparent);opacity:0;transition:.4s;pointer-events:none}
+.g-item:hover figcaption,.g-item:focus-within figcaption{opacity:1}
+.lightbox{position:fixed;inset:0;z-index:300;background:rgba(10,14,22,.95);display:flex;align-items:center;justify-content:center;padding:20px}
+.lightbox[hidden]{display:none}
+.lightbox figure{margin:0;max-width:min(1100px,86vw);text-align:center}
+.lightbox img{max-height:80vh;width:auto;margin:0 auto;object-fit:contain}
+.lightbox figcaption{color:#fff;margin-top:12px;font-size:.95rem}
+.lb-close,.lb-prev,.lb-next{position:absolute;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.3);color:#fff;width:48px;height:48px;font-size:1.8rem;line-height:1;cursor:pointer}
+.lb-close{top:16px;right:16px}.lb-prev{left:14px;top:50%;margin-top:-24px}.lb-next{right:14px;top:50%;margin-top:-24px}
+.lb-close:hover,.lb-prev:hover,.lb-next:hover{background:var(--gold);color:var(--ink)}
+
+.quote{margin:0;background:#fff;padding:30px;border-top:3px solid var(--gold);box-shadow:0 10px 30px rgba(0,0,0,.07)}
+.quote p{font-family:var(--serif);font-size:1.3rem;line-height:1.4;font-style:italic}
+.quote footer{font-size:.86rem;letter-spacing:.1em;text-transform:uppercase}.quote footer span{color:var(--muted);text-transform:none;letter-spacing:0}
+.stars{color:var(--gold);letter-spacing:3px;margin-bottom:10px}
+
+.map{position:relative;min-width:0;background:var(--sand)}
+.map iframe{width:100%;height:420px;border:0;display:block}
+.map.big iframe{height:min(560px,70vh)}
+.loc-row{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;margin-top:30px}
+.loc-row h3{margin-bottom:.2em}.loc-row p{margin:0;color:var(--muted)}
+.cta-band{background:linear-gradient(135deg,var(--navy),var(--navy-2));color:#fff}
+.cta-band .lead{color:rgba(255,255,255,.8);max-width:620px;margin:0 auto 26px}
+
+/* ---------- forms & contact ---------- */
+.card-box,.form.card{background:#fff;padding:clamp(22px,4vw,44px);box-shadow:0 14px 40px rgba(0,0,0,.1)}
+.form{display:grid;gap:16px;min-width:0}
+.form label{display:grid;gap:6px;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.form input,.form select,.form textarea{width:100%;font:400 1rem var(--sans);padding:13px 14px;border:1px solid #cfc3ae;background:#fffdf8;color:var(--text);border-radius:0;letter-spacing:0;text-transform:none}
+.form input:focus,.form select:focus,.form textarea:focus{outline:2px solid var(--gold);border-color:var(--gold)}
+.form [aria-invalid="true"]{border-color:#b3261e;background:#fff6f5}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}.f-row.three{grid-template-columns:repeat(3,1fr)}
+.f-err{color:#b3261e;font-size:.8rem;letter-spacing:0;text-transform:none}
+.form-note{font-size:.88rem;color:var(--muted);margin:0}
+.form-status{min-height:1.4em;font-size:.98rem}
+.form-status.ok{color:#1d6b3a;background:#e8f5ec;padding:14px 16px}.form-status.err{color:#b3261e;background:#fdecea;padding:14px 16px}
+.form .btn{margin:0;justify-self:start}
+.form button:disabled{opacity:.6;cursor:wait}
+.contact-cards{display:grid;gap:18px;margin-top:10px}
+.contact-cards li{display:flex;gap:16px;align-items:flex-start}
+.contact-cards span{flex:0 0 46px;height:46px;border:1px solid var(--gold);color:var(--gold);display:grid;place-items:center}
+.contact-cards h3{font-size:1.2rem;margin:0 0 .15em}.contact-cards p{margin:0;color:var(--muted)}
+.contact-cards a{text-decoration:none;border-bottom:1px solid var(--gold)}
+
+/* ---------- footer ---------- */
+.footer{background:var(--ink);color:rgba(255,255,255,.78);padding-top:70px;font-size:.98rem}
+.foot-grid{display:grid;grid-template-columns:1.2fr .8fr 1.2fr;gap:40px}
+.footer h3{font-size:.8rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-family:var(--sans);font-weight:500;margin-bottom:16px}
+.footer li{margin-bottom:8px;overflow-wrap:anywhere}.footer a{text-decoration:none}.footer a:hover{color:var(--gold-2)}
+.foot-note{margin-top:18px;max-width:340px;font-size:.92rem}
+.foot-base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:50px;padding-block:22px;border-top:1px solid rgba(255,255,255,.12);font-size:.84rem}
+.fab{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:90;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.3);transition:.3s}
+.fab:hover{transform:scale(1.08)}.fab-wa{background:#1fa855}
+.nf{min-height:100vh;display:grid;place-content:center;justify-items:center;text-align:center;gap:10px;padding:30px;background:var(--navy);color:#fff}
+.nf .btn{margin:14px 0 0}
+
+/* ---------- motion ---------- */
+.js .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease);animation:showFallback 0s 3s forwards}
+.js .reveal.in{opacity:1;transform:none}
+@keyframes showFallback{to{opacity:1;transform:none}}
+
+/* ---------- responsive ---------- */
+@media (max-width:1180px){
+  .burger{display:flex}
+  #menu{position:fixed;inset:calc(var(--nav-h) + 8px) 0 0 auto;width:min(86vw,360px);background:var(--navy);padding:20px 28px 40px;transform:translateX(100%);transition:transform .45s var(--ease);overflow-y:auto;visibility:hidden}
+  .nav.open #menu{transform:none;visibility:visible}
+  #menu ul{flex-direction:column;align-items:stretch;gap:0}
+  #menu li{border-bottom:1px solid rgba(255,255,255,.1)}
+  #menu a:not(.btn){display:block;padding:16px 4px;font-size:.84rem}
+  #menu .nav-cta{border:0;margin:16px 0 0}.nav-cta .btn{width:100%;padding:16px}
+  .nav.open{z-index:120}
+  .nav-in{position:relative;z-index:2}
+}
+@media (max-width:900px){
+  .split{grid-template-columns:1fr}.split.rev .split-text{order:0}
+  .foot-grid{grid-template-columns:1fr 1fr}.foot-grid>div:first-child{grid-column:1/-1}
+  .g-preview{grid-template-columns:repeat(3,1fr)}.g-preview a:nth-child(n+4){display:none}
+  .split-img img.alt{margin-top:24px}
+}
+@media (max-width:640px){
+  :root{--nav-h:66px}
+  body{font-size:1rem}
+  .brand img{width:42px}.brand b{font-size:1.2rem}.brand small{font-size:.54rem}
+  .f-row,.f-row.three{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .hero-cta .btn{width:100%;margin-right:0}
+  .btn{padding:15px 22px}
+  .masonry{columns:2 140px;column-gap:10px}.g-item{margin-bottom:10px}
+  .lb-prev{left:6px}.lb-next{right:6px}.lightbox figure{max-width:92vw}
+  .foot-base{flex-direction:column}
+  .map iframe{height:320px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .js .reveal,.hero .eyebrow,.hero h1,.hero p,.hero-cta,.hero-links{opacity:1;transform:none}
+}
+
+/* ---------- "Our Businesses" dropdown ---------- */
+.has-sub{position:relative}
+.sub-btn{background:none;border:0;color:inherit;font:500 .74rem var(--sans);letter-spacing:.18em;text-transform:uppercase;padding:8px 2px;cursor:pointer;display:inline-flex;gap:7px;align-items:center;white-space:nowrap}
+.sub-btn svg{transition:transform .3s var(--ease)}
+.sub-btn:hover,.sub-btn.on{color:var(--gold-2)}
+.has-sub.open .sub-btn svg{transform:rotate(180deg)}
+#menu .sub{position:absolute;top:100%;right:0;min-width:280px;display:block;background:rgba(14,32,55,.98);border:1px solid rgba(201,164,92,.4);box-shadow:0 20px 50px rgba(0,0,0,.4);padding:8px;opacity:0;visibility:hidden;transform:translateY(8px);transition:.3s var(--ease)}
+#menu .has-sub.open .sub,#menu .has-sub:hover .sub{opacity:1;visibility:visible;transform:none}
+#menu .sub li{border:0}
+#menu .sub a:not(.btn){display:block;padding:12px 14px;letter-spacing:0;text-transform:none;font-size:1rem}
+#menu .sub a::after{display:none}
+.sub b{display:block;font-family:var(--serif);font-size:1.2rem;font-weight:500}
+.sub small{display:block;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-2)}
+#menu .sub a:hover{background:rgba(201,164,92,.14)}
+.foot-sub{margin-top:26px}
+
+/* ---------- Destiny DreamZ Villa page: identity taken from the Villa logo (sage, sky, sunflower, leaf green) ---------- */
+.villa{--v-forest:#16352a;--v-deep:#0f2a21;--v-green:#3E9A6C;--v-sage:#DDE9DB;--v-sky:#C6D7F0;--v-lime:#D4E8C8;--v-sun:#FFD94F;--v-ink:#2E473B}
+.villa .eyebrow{color:var(--v-sun)}.villa .eyebrow::before{background:var(--v-sun)}
+.villa .section:not(.v-forest):not(.cta-band) .eyebrow{color:var(--v-green)}
+.villa .section:not(.v-forest):not(.cta-band) .eyebrow::before{background:var(--v-green)}
+.villa h2{color:var(--v-ink)}.villa .v-forest h2,.villa .cta-band h2{color:#fff}
+.v-hero{position:relative;color:#fff;overflow:hidden;background:linear-gradient(135deg,var(--v-deep),#1c4a38 55%,#2b6a50);padding-top:calc(var(--nav-h) + 30px);padding-bottom:70px}
+.v-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 88% 12%,rgba(255,217,79,.2),transparent 42%),radial-gradient(circle at 8% 92%,rgba(198,215,240,.16),transparent 46%)}
+.v-hero-in{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(30px,6vw,80px);align-items:center;min-height:calc(100vh - 100px);min-height:calc(100svh - 100px)}
+.v-hero h1{font-size:clamp(3rem,8vw,6rem);font-weight:400;line-height:.98;margin-bottom:.2em}
+.v-hero h1 em{color:var(--v-sun)}
+.v-tag{font-family:var(--serif);font-size:clamp(1.4rem,3vw,2rem);font-style:italic;color:var(--v-sage);margin-bottom:.6em}
+.v-hero-text>p{max-width:540px;color:rgba(255,255,255,.88);font-size:1.12rem}
+.v-hero-text>*{opacity:0;transform:translateY(24px);animation:rise .9s var(--ease) forwards}
+.v-hero-text>:nth-child(2){animation-delay:.1s}.v-hero-text>:nth-child(3){animation-delay:.2s}.v-hero-text>:nth-child(4){animation-delay:.3s}.v-hero-text>:nth-child(5){animation-delay:.4s}.v-hero-text>:nth-child(6){animation-delay:.5s}
+.v-hero-photo{position:relative;justify-self:center;width:min(100%,420px);margin-bottom:30px}
+.v-hero-photo>img:first-child{width:100%;height:auto;aspect-ratio:2/3;object-fit:cover;border:10px solid rgba(255,255,255,.1);box-shadow:0 30px 70px rgba(0,0,0,.45)}
+.v-logo-badge{position:absolute;left:-12%;bottom:-6%;width:50%;height:auto;border-radius:14px;border:3px solid #fff;box-shadow:0 14px 34px rgba(0,0,0,.4)}
+.villa .btn-sun{background:var(--v-sun);border-color:var(--v-sun);color:#1b2a12}
+.villa .btn-sun:hover{background:#ffe680;border-color:#ffe680;transform:translateY(-2px);box-shadow:0 10px 24px rgba(255,217,79,.3)}
+.villa .btn-green{background:var(--v-green);border-color:var(--v-green);color:#fff;margin-right:8px}
+.villa .btn-green:hover{background:#2f8058;border-color:#2f8058}
+.villa .btn-line{color:var(--v-sage);border-color:var(--v-sage)}.villa .btn-line:hover{background:var(--v-sage);color:var(--v-deep)}
+.villa .btn-line.dark{color:var(--v-ink);border-color:var(--v-ink)}.villa .btn-line.dark:hover{background:var(--v-ink);color:#fff}
+.villa .hero-links a{color:var(--v-sun)}
+.v-sage{background:linear-gradient(180deg,var(--v-sage),var(--v-lime))}
+.v-forest{background:var(--v-forest);color:#fff}
+.v-about-img img{width:100%;height:auto;border-radius:20px;border:8px solid #fff;box-shadow:0 24px 60px rgba(30,70,50,.25)}
+.villa .fac{background:#fff;border-color:rgba(62,154,108,.3)}
+.villa .fac:hover{border-color:var(--v-green)}
+.villa .fac-ic{color:var(--v-green)}
+.villa .fac p{color:#566b5f}
+.v-note{margin-top:34px;color:var(--v-ink);font-size:.98rem}
+.v-act{background:rgba(255,255,255,.06);border:1px solid rgba(255,217,79,.28);padding:30px 26px}
+.v-act h3{color:#fff}.v-act p{color:rgba(255,255,255,.82)}
+.v-num{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--v-sun);color:#1b2a12;font-weight:600;margin-bottom:14px}
+.v-act ul{list-style:disc;padding-left:1.1em;font-size:.94rem;color:rgba(255,255,255,.72)}.v-act li{margin-bottom:6px}
+.villa .exp h3{color:var(--v-ink)}
+.villa .g-item{background:var(--v-sage)}
+.villa .contact-cards span{border-color:var(--v-green);color:var(--v-green)}
+.villa .contact-cards a{border-bottom-color:var(--v-green)}
+.villa .contact-cards p{color:#4a5f54}
+.villa .head .lead,.villa .lead{color:#566b5f}.villa .cta-band .lead{color:rgba(255,255,255,.85)}
+.villa .form input:focus,.villa .form select:focus,.villa .form textarea:focus{outline-color:var(--v-green);border-color:var(--v-green)}
+.villa .form .btn-gold{background:var(--v-green);border-color:var(--v-green);color:#fff}.villa .form .btn-gold:hover{background:#2f8058;border-color:#2f8058;box-shadow:none}
+.v-form-title{margin-bottom:.6em}
+.v-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}.v-actions .btn{margin:0}
+.villa .cta-band{background:linear-gradient(135deg,var(--v-deep),#1c4a38)}
+
+/* mobile navigation: the dropdown becomes an accordion */
+@media (max-width:1180px){
+  .sub-btn{width:100%;justify-content:space-between;padding:16px 4px;font-size:.84rem}
+  #menu .sub{position:static;display:none;opacity:1;visibility:visible;transform:none;min-width:0;border:0;background:rgba(255,255,255,.05);box-shadow:none;padding:4px 0 8px}
+  #menu .has-sub.open .sub{display:block}
+  #menu .sub a:not(.btn){padding:12px 16px}
+}
+@media (max-width:900px){
+  .v-hero-in{grid-template-columns:1fr;min-height:0}
+  .v-hero-photo{width:min(86%,360px);order:-1;margin-bottom:34px}
+  .v-hero{padding-top:calc(var(--nav-h) + 24px)}
+  .v-logo-badge{left:-6%}
+}
+@media (max-width:640px){
+  .villa .btn-green{width:100%;margin-right:0}.v-actions .btn{width:100%}
+  .v-hero-text .hero-cta .btn{width:100%;margin-right:0}
+}
+@media (prefers-reduced-motion:reduce){.v-hero-text>*{opacity:1;transform:none}}
+
+/* ---------- navigation fit fixes ---------- */
+.btn.sm{white-space:nowrap}
+@media (min-width:1181px){
+  .nav-in{gap:14px}
+  #menu ul{gap:clamp(10px,1vw,22px)}
+  #menu a:not(.btn),.sub-btn{letter-spacing:.13em;font-size:.7rem}
+  .nav-cta{margin-left:0}
+  .nav-cta .btn.sm{padding:11px 15px;letter-spacing:.15em}
+  .brand b{font-size:1.4rem}
+  /* centre the menu in the space beside the logo */
+  #menu{flex:1 1 auto}
+  #menu ul{justify-content:center}
+  /* Villa logo badge + Book Enquiry button on the right edge */
+  .nav-right{display:flex;align-items:center;gap:16px;flex:0 0 auto}
+  .nav-villa{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none}
+  .nav-villa .nv-name{display:none;flex-direction:column;line-height:1.15}
+  @media (min-width:1600px){.nav-villa .nv-name{display:flex}}
+  .nav-villa .nv-name b{font-family:var(--serif);font-size:1rem;letter-spacing:.12em;font-weight:600;text-transform:uppercase;white-space:nowrap}
+  .nav-villa .nv-name small{font-size:.6rem;letter-spacing:.34em;text-transform:uppercase;color:#FFD94F}
+  .nav:not(.solid) .nav-villa .nv-name{text-shadow:0 1px 3px rgba(0,0,0,.75),0 0 14px rgba(0,0,0,.55)}
+  .nav-villa img{display:block;width:62px;height:auto;border-radius:8px;border:2px solid #fff;box-shadow:0 4px 14px rgba(0,0,0,.35);transition:transform .3s var(--ease)}
+  .nav-villa:hover img{transform:translateY(-2px)}
+  .nav-cta-m{display:none}
+}
+@media (max-width:1180px){
+  .nav-right{display:none}
+  /* backdrop-filter would make the fixed mobile panel size itself to the header instead of the screen */
+  .nav.solid,.nav.open{-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--navy)}
+}
+
+/* static enquiry forms: two send buttons */
+.form-actions{display:flex;flex-wrap:wrap;gap:10px}
+.form-actions .btn{margin:0}
+.form-status a{color:inherit;font-weight:500}
+@media (max-width:640px){.form-actions .btn{width:100%}}
+
+/* ---------- Villa page: its own header, menu and footer identity ---------- */
+.brand-villa img{width:76px;height:auto;border-radius:8px;border:2px solid #fff;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.brand b{font-size:1.15rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;white-space:nowrap}
+.brand small{font-size:.72rem;letter-spacing:.5em}
+.brand-villa small{color:#FFD94F}
+.villa-page .nav.solid,.villa-page .nav.open{background:rgba(15,42,33,.97)}
+.villa-page #menu a[aria-current="page"],.villa-page .sub-btn:hover,.villa-page .sub-btn.on,.villa-page #menu a:not(.btn):hover{color:#FFD94F}
+.villa-page #menu a:not(.btn)::after{background:#FFD94F}
+.villa-page .nav-cta .btn-gold{background:#FFD94F;border-color:#FFD94F;color:#1b2a12}
+.villa-page .nav-cta .btn-gold:hover{background:#ffe680;border-color:#ffe680}
+.villa-page #menu .sub{background:rgba(15,42,33,.98);border-color:rgba(255,217,79,.4)}
+.villa-page #menu .sub small{color:#FFD94F}
+.villa-page #menu .sub a:hover{background:rgba(255,217,79,.12)}
+.villa-page .footer{background:#0b1f18}
+.villa-page .footer h3{color:#FFD94F}
+.villa-page .footer a:hover{color:#FFD94F}
+@media (max-width:1180px){
+  .villa-page .nav.solid,.villa-page .nav.open{background:#0f2a21}
+  .villa-page #menu{background:#0f2a21}
+}
+@media (max-width:640px){
+  .brand-villa img{width:62px}
+  .brand b{font-size:.98rem;letter-spacing:.08em}
+  .brand small{font-size:.62rem;letter-spacing:.4em}
+}
+
+/* in-page links on the Villa page stop below the fixed header */
+[id^="villa-"]{scroll-margin-top:var(--nav-h)}
+
+/* ---------- maps: compact ---------- */
+.map iframe{height:340px}
+.map.big{max-width:900px;margin-inline:auto}
+.map.big iframe{height:360px}
+@media (max-width:640px){.map iframe,.map.big iframe{height:280px}}
+
+/* ---------- brighter hero photos (light overlay, text kept legible with soft shadows) ---------- */
+.hero h1{text-shadow:0 2px 26px rgba(0,0,0,.5),0 1px 3px rgba(0,0,0,.35)}
+.hero p{text-shadow:0 1px 14px rgba(0,0,0,.65),0 1px 2px rgba(0,0,0,.4)}
+.hero-links a,.hero .eyebrow{text-shadow:0 1px 10px rgba(0,0,0,.8)}
+.page-hero h1,.page-hero p{text-shadow:0 2px 20px rgba(0,0,0,.55)}
+/* soft fade behind the transparent header so the menu stays readable on a bright photo */
+.nav::before{content:"";position:absolute;inset:0 0 -34px 0;background:linear-gradient(180deg,rgba(14,32,55,.55),transparent);pointer-events:none;transition:opacity .4s var(--ease)}
+.nav.solid::before,.nav.open::before{opacity:0}
+.nav-in{position:relative}
+
+/* readable small text and buttons over the bright photo */
+.hero .eyebrow,.page-hero .eyebrow{color:#fff}
+.hero .eyebrow::before,.page-hero .eyebrow::before{background:var(--gold-2)}
+.hero-links a{color:#fff;border-bottom:1px solid var(--gold-2)}
+.hero .btn-line,.page-hero .btn-line{background:rgba(14,32,55,.55);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);color:#fff;border-color:rgba(255,255,255,.85)}
+.hero .btn-line:hover{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+@media (max-width:700px){
+  .hero-shade{background:linear-gradient(180deg,rgba(14,32,55,.3) 0%,transparent 26%,rgba(14,32,55,.26) 42%,rgba(14,32,55,.5) 100%)}
+}
+
+/* ---------- photo quality: ONE consistent colour grade for every photograph ----------
+   Brighter, crisper, more vivid, but natural. Logos and brand artwork are deliberately not filtered,
+   so the original logo colours stay exactly as supplied. No other filter is stacked on these images. */
+:root{--photo-fx:brightness(1.06) contrast(1.07) saturate(1.12);--hero-fx:brightness(1.1) contrast(1.07) saturate(1.14)}
+.hero-img,.page-hero img{filter:var(--hero-fx)}
+.room-img img,.split-img img,.exp img,.fac-pic img,.g-item img,.g-preview img,.v-hero-photo>img:first-child,.lightbox img{filter:var(--photo-fx)}
+img{image-rendering:auto}
+
+/* ---------- grids: no half-empty rows ---------- */
+.grid{--g:clamp(18px,2.4vw,30px);gap:var(--g)}
+/* rooms: cards share the row evenly (2 rooms fill the width, 3 rooms sit three across, 1 room is centred) */
+.rooms-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))}
+.rooms-grid>.room-card{width:100%;max-width:620px;justify-self:center}
+.rooms-grid .room-img{aspect-ratio:16/10}
+/* facilities, experiences, reviews: items wrap and the last row is centred instead of leaving a gap */
+.fac-grid,.exp-grid,.quote-grid{display:flex;flex-wrap:wrap;justify-content:center;--cols:4}
+.fac-grid>*,.exp-grid>*,.quote-grid>*{flex:0 0 calc((100% - (var(--cols) - 1) * var(--g)) / var(--cols))}
+.exp-grid,.quote-grid{--cols:3}
+.fac-grid.fac-5{--cols:5}
+.exp-grid.exp-4{--cols:4}
+@media (max-width:999px){
+  .fac-grid,.fac-grid.fac-5{--cols:3}
+  .exp-grid,.exp-grid.exp-4,.quote-grid{--cols:2}
+}
+@media (max-width:639px){
+  .fac-grid,.fac-grid.fac-5{--cols:2}
+  .exp-grid,.exp-grid.exp-4,.quote-grid{--cols:1}
+}
+@media (max-width:420px){.fac-grid,.fac-grid.fac-5{--cols:1}}
+
+/* breathing room between a grid and its button */
+.grid + .center{margin-top:clamp(26px,3.2vw,44px)}
+
+/* ---------- facility cards with photos ---------- */
+.fac.fac-media{padding:0;overflow:hidden;display:flex;flex-direction:column}
+.fac-pic{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--sand)}
+.fac-pic img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s var(--ease)}
+.fac.fac-media:hover .fac-pic img{transform:scale(1.07)}
+.fac-badge{position:absolute;left:14px;bottom:14px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.95);color:var(--gold);box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.fac-pic.no-photo{display:grid;place-items:center;background:linear-gradient(135deg,#f3ead7,#e6d8ba);color:var(--gold)}
+.fac-pic.no-photo .fac-ic{margin:0;color:var(--gold)}
+.fac-body{padding:20px 22px 24px}
+.fac-body h3{font-size:1.3rem;margin-bottom:.3em}
+.fac-body p{margin:0;font-size:.96rem;color:var(--muted)}
+
+/* ---------- contact icons ---------- */
+.contact-list li{display:flex;gap:12px;align-items:flex-start}
+.contact-list .ci{flex:0 0 20px;margin-top:4px;color:var(--gold-2);display:inline-flex}
+.villa-page .contact-list .ci{color:#FFD94F}
+.hero-links a,.v-hero .hero-links a{display:inline-flex;align-items:center;gap:7px}
+.btn svg{flex:0 0 auto}
+
+/* ---------- full navigation bar on 1181-1320px screens (common laptop widths) ---------- */
+@media (min-width:1181px) and (max-width:1320px){
+  .nav-in{gap:10px;padding-inline:24px}
+  #menu ul{gap:10px}
+  #menu a:not(.btn),.sub-btn{font-size:.66rem;letter-spacing:.09em}
+  .nav-cta .btn.sm{padding:10px 12px;font-size:.66rem;letter-spacing:.1em}
+  .brand{gap:10px}
+  .brand img{width:44px}
+  .brand b{font-size:1rem;letter-spacing:.08em}
+  .brand small{font-size:.6rem;letter-spacing:.36em}
+  .brand-villa img{width:62px}
+}
+
+/* ---------- inner-page heroes: full-screen photo, same size as the home hero ---------- */
+.page-hero{min-height:100vh;min-height:100svh;align-items:center}
+.page-hero img{object-position:center 40%}
+.page-hero::after{background:
+  linear-gradient(90deg,rgba(14,32,55,.5) 0%,rgba(14,32,55,.2) 42%,transparent 72%),
+  linear-gradient(180deg,rgba(14,32,55,.3) 0%,transparent 30%,transparent 55%,rgba(20,13,9,.45) 100%)}
+.page-hero-in{padding-top:calc(var(--nav-h) + 30px);padding-bottom:70px}
+.page-hero h1{font-size:clamp(3rem,8vw,6rem);line-height:1}
+.page-hero p{font-size:1.2rem;max-width:560px}
+@media (max-width:700px){
+  .page-hero::after{background:linear-gradient(180deg,rgba(14,32,55,.32) 0%,transparent 26%,rgba(14,32,55,.26) 45%,rgba(14,32,55,.52) 100%)}
+  .page-hero h1{font-size:clamp(2.6rem,12vw,3.6rem)}
+}
+
+/* tablets and phones: show the COMPLETE photo at its natural shape, title on a navy panel below it */
+@media (max-width:900px){
+  .page-hero{display:block;min-height:0;background:var(--navy)}
+  .page-hero img{position:relative;inset:auto;display:block;width:100%;height:auto;max-height:76vh;object-fit:cover;object-position:center}
+  .page-hero::after{display:none}
+  .page-hero-in{position:relative;padding:26px var(--gut) 40px}
+}
+
+/* ---------- clean, bright hero photos: no dark overlay, no zoom softening ---------- */
+.hero-shade,.page-hero::after{display:none!important;background:none!important}
+.nav::before{display:none}
+.hero-img{animation:none;transform:none;image-rendering:auto}
+.hero-img,.page-hero img{filter:none}
+.nav:not(.solid):not(.open) .brand,.nav:not(.solid):not(.open) #menu a:not(.btn),.nav:not(.solid):not(.open) .sub-btn{text-shadow:0 1px 3px rgba(0,0,0,.75),0 0 14px rgba(0,0,0,.55)}
+
+/* ---------- Villa name in the navbar on laptop screens (1281px and up), with a tighter menu to make room ---------- */
+@media (min-width:1281px) and (max-width:1599px){
+  .nav-in{gap:12px;padding-inline:24px}
+  #menu ul{gap:12px}
+  #menu a:not(.btn),.sub-btn{font-size:.66rem;letter-spacing:.08em}
+  .brand b{font-size:1.1rem;letter-spacing:.1em}
+  .brand img{width:46px}
+  .brand{gap:10px}
+  .nav-right{gap:12px}
+  .nav-cta .btn.sm{padding:10px 13px;font-size:.66rem;letter-spacing:.1em}
+  .nav-villa{gap:8px}
+  .nav-villa img{width:54px}
+  .nav-villa .nv-name{display:flex}
+  .nav-villa .nv-name b{font-size:.82rem;letter-spacing:.07em}
+  .nav-villa .nv-name small{font-size:.54rem;letter-spacing:.3em}
+}
+.nav:not(.solid) .nav-villa .nv-name,.nav:not(.solid) .brand span{text-shadow:0 1px 2px rgba(0,0,0,.9),0 0 8px rgba(0,0,0,.8),0 0 20px rgba(0,0,0,.55)}
+
+/* ---------- Villa name under the badge on small laptop screens (1181-1280px) ---------- */
+@media (min-width:1181px) and (max-width:1280px){
+  .nav-villa{flex-direction:column;gap:3px;align-items:center}
+  .nav-villa img{width:46px}
+  .nav-villa .nv-name{display:flex;flex-direction:row;gap:4px;align-items:baseline}
+  .nav-villa .nv-name b{font-size:.58rem;letter-spacing:.06em}
+  .nav-villa .nv-name small{font-size:.58rem;letter-spacing:.06em}
+}
+
+/* ---------- bigger Villa badge + name ---------- */
+@media (min-width:1181px) and (max-width:1280px){
+  .nav-villa{gap:4px}
+  .nav-villa img{width:72px}
+  .nav-villa .nv-name b,.nav-villa .nv-name small{font-size:.8rem;letter-spacing:.08em}
+}
+@media (min-width:1281px){
+  .nav-villa{gap:12px}
+  .nav-villa img{width:74px;border-radius:6px}
+  .nav-villa .nv-name{display:flex}
+  .nav-villa .nv-name b{font-size:1.4rem;letter-spacing:.2em;font-weight:600}
+  .nav-villa .nv-name small{font-size:.62rem;letter-spacing:.34em}
+}
+@media (min-width:1281px) and (max-width:1599px){
+  .nav-villa{gap:10px}
+  .nav-villa img{width:64px}
+  .nav-villa .nv-name b{font-size:1.1rem;letter-spacing:.1em}
+}
+@media (min-width:1281px) and (max-width:1320px){
+  .nav-villa img{width:58px}
+  .nav-villa .nv-name b{font-size:1rem;letter-spacing:.08em}
+  .nav-villa .nv-name small{font-size:.6rem;letter-spacing:.36em}
+}
+
+/* ---------- "Visit Our Another Hotel" caption below the hotel badge ---------- */
+@media (min-width:1181px){
+  .nav-villa{position:relative}
+  .nav-villa .nv-cap{position:absolute;left:0;top:100%;margin-top:3px;white-space:nowrap;font:italic 400 .78rem/1 var(--serif);letter-spacing:.03em;color:var(--gold-2);text-shadow:0 1px 2px rgba(0,0,0,.9),0 0 8px rgba(0,0,0,.7)}
+}
+/* small laptops (1181-1280px): caption sits right below the badge, then the name */
+@media (min-width:1181px) and (max-width:1280px){.nav-villa img{order:0}.nav-villa .nv-cap{position:static;order:1;margin:0;font-size:.8rem}.nav-villa .nv-name{order:2}}
+.nav-villa .nv-cap{font-size:.95rem;color:#F8F3D9;font-weight:500;text-shadow:0 1px 2px rgba(0,0,0,.95),0 0 8px rgba(0,0,0,.85),0 0 16px rgba(0,0,0,.6)}
+
+/* ---------- Rounded corners on photos ---------- */
+.room-img,.g-item,.split-img,.exp,.fac-pic,.g-preview{border-radius:14px;overflow:hidden}
+.v-hero-photo>img:first-child{border-radius:14px}
+.room-img img,.split-img img,.fac-pic img,.g-item img,.g-preview img{border-radius:14px}
+.lightbox img{border-radius:10px}
+
+/* ---------- Rounded corners on all cards ---------- */
+.room-card,.exp,.fac,.quote,.card-box,.form.card,.v-act,.map,.v-about-img,.contact-cards span{border-radius:16px}
+.contact-cards span{border-radius:12px}
+.fac-body{border-radius:0 0 16px 16px}
+
+/* ---------- "Visit Our Another Hotel" block under the Villa hero ---------- */
+.v-other{display:inline-flex;flex-direction:column;gap:8px;margin-top:26px;color:#fff;text-decoration:none}
+.v-other-cap{font:italic 500 1.05rem/1 var(--serif);color:#F8F3D9;letter-spacing:.03em}
+.v-other-card{display:inline-flex;align-items:center;gap:12px;padding:8px 16px 8px 8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.35);border-radius:12px;transition:background .3s}
+.v-other:hover .v-other-card{background:rgba(255,255,255,.2)}
+.v-other-card img{width:52px;height:auto;border-radius:8px}
+.v-other-card span{display:flex;flex-direction:column;line-height:1.15}
+.v-other-card b{font-family:var(--serif);font-size:1rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.v-other-card small{font-size:.6rem;letter-spacing:.34em;text-transform:uppercase;color:#FFD94F}
+
+/* ---------- "Visit Our Another Hotel" inside the mobile menu ---------- */
+.nav-other-m{display:none}
+@media (max-width:1180px){
+  .nav-other-m{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.2)}
+  .nav-other-m span{font:italic 500 1rem/1 var(--serif);color:#F8F3D9}
+  .nav-other-m a{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;flex-wrap:wrap}
+  .nav-other-m img{width:46px;height:auto;border-radius:8px;border:2px solid #fff}
+  .nav-other-m b{font-family:var(--serif);font-size:.95rem;letter-spacing:.1em;text-transform:uppercase}
+  .nav-other-m small{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:#FFD94F}
+}
+
+/* ---------- Photos on the villa "Why stay here" cards ---------- */
+.fac-v{overflow:hidden;padding-top:0}
+.fac-v .fac-photo{display:block;margin:0 -26px 22px;aspect-ratio:16/10;overflow:hidden}
+.fac-v .fac-photo img{width:100%;height:100%;object-fit:cover;border-radius:0}
+
+/* ---------- Compact Villa booking enquiry + contact section ---------- */
+#villa-enquiry.section{padding-block:clamp(36px,5vw,60px)}
+#villa-enquiry .split{gap:clamp(20px,3.5vw,48px)}
+#villa-enquiry h2{font-size:clamp(1.5rem,2.6vw,2.1rem);margin-bottom:.4em}
+#villa-enquiry .card-box{padding:clamp(16px,2.4vw,26px)}
+#villa-enquiry .form{gap:10px}
+#villa-enquiry .form label{font-size:.66rem;letter-spacing:.14em}
+#villa-enquiry .form input,#villa-enquiry .form select,#villa-enquiry .form textarea{padding:8px 10px;font-size:.9rem}
+#villa-enquiry .form textarea{min-height:0;height:64px}
+#villa-enquiry .form-note{font-size:.76rem;line-height:1.4}
+#villa-enquiry .form-actions .btn{padding:10px 16px;font-size:.72rem}
+#villa-enquiry .lead{font-size:.95rem;line-height:1.5}
+#villa-enquiry .contact-cards{gap:10px;margin-top:4px}
+#villa-enquiry .contact-cards span{flex:0 0 36px;height:36px}
+#villa-enquiry .contact-cards span svg{width:18px;height:18px}
+#villa-enquiry .contact-cards h3{font-size:1rem}
+#villa-enquiry .contact-cards p{font-size:.88rem;line-height:1.4}
+#villa-enquiry .map.big iframe{height:220px}
+
+/* ---------- Hero links (Call / WhatsApp / Directions): always readable over photos ---------- */
+.hero-links{gap:10px 12px}
+.hero-links a,.v-hero .hero-links a{color:#fff;font-weight:500;padding:9px 16px;background:rgba(14,32,55,.78);border:1px solid rgba(255,255,255,.55);border-radius:999px;text-shadow:none;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.hero-links a:hover,.v-hero .hero-links a:hover{background:var(--gold);border-color:var(--gold);color:#140d09}
+.villa .hero-links a,.villa .v-hero .hero-links a{background:rgba(15,42,33,.8)}
+.villa .hero-links a:hover{background:var(--v-sun);border-color:var(--v-sun);color:#1b2a12}
+
+/* ---------- spacing around the "Visit Our Another Hotel" block ---------- */
+.v-other{margin-top:28px;margin-bottom:36px}
+.v-hero-text{padding-bottom:12px}
+@media (max-width:900px){.v-hero-in{row-gap:40px}.v-hero-photo{margin-top:8px}}
